@@ -23,18 +23,20 @@ public class DBHelper extends SQLiteOpenHelper {
     // 表集合
     public static String DATABASE_NAME = "database.db";
 
-    public static void initDBHelper(String dbName,Class... cls) {
+    public static void initDBHelper(String dbName, Class... cls) {
         DATABASE_NAME = dbName;
-        if(cls!=null&&cls.length>0){
+        if (cls != null && cls.length > 0) {
             for (int i = 0; i < cls.length; i++) {
                 ClassList.add(cls[i]);
             }
         }
     }
 
-    public static void addTable(Class c){
-        ClassList.add(c);
-        DATABASE_VERSION++;
+    public static void addTable(Class c) {
+        if (!ClassList.contains(c)) {
+            ClassList.add(c);
+            DATABASE_VERSION++;
+        }
     }
 
     /**
@@ -85,11 +87,11 @@ public class DBHelper extends SQLiteOpenHelper {
                 for (int m = 0; m < declaredFields.length; m++) { //针对类里每个属性增加表的各个字段
                     String fieldname = declaredFields[m].getName();
                     String fieldtype = " VARCHAR"; //默认字段类型为 VARCHAR
-                    if (declaredFields[m].getType() == Integer.class || declaredFields[m].getType() == Double.class || declaredFields[m].getType() == Float.class) {
+                    if (declaredFields[m].getType() == int.class || declaredFields[m].getType() == double.class || declaredFields[m].getType() == float.class) {
                         fieldtype = " INTEGER";
                     }
                     db.execSQL("ALTER TABLE " + tableName + " ADD '" + fieldname + "' " + fieldtype);
-                    Log.i(Tag, "table:" + tableName + " +field:" + fieldname + " type : " + fieldtype);
+                    Log.i(Tag, "[" + tableName + "] +(" + fieldname + ") --" + fieldtype);
                 }
             }
 
