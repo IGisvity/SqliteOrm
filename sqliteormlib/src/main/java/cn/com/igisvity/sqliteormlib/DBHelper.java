@@ -15,14 +15,28 @@ public class DBHelper extends SQLiteOpenHelper {
     /**
      * 数据库版本升级
      */
-    private static int DATABASE_VERSION = 13; //片管2.1
+    public static int DATABASE_VERSION = 1;
 
-    private  ArrayList<Class> ClassList = new ArrayList<>();
+    public static ArrayList<Class> ClassList = new ArrayList<>();
 
     private String Tag = this.getClass().getSimpleName();
     // 表集合
-//    public static Class<?>[] ClassList = new Class[]{FarmerTable.class, DiseaseTable.class};
-    private static   String DATABASE_NAME = "lhoa.db";
+    public static String DATABASE_NAME = "database.db";
+
+    public static void initDBHelper(String dbName,Class... cls) {
+        DATABASE_NAME = dbName;
+        if(cls!=null&&cls.length>0){
+            for (int i = 0; i < cls.length; i++) {
+                ClassList.add(cls[i]);
+            }
+        }
+    }
+
+    public static void addTable(Class c){
+        ClassList.add(c);
+        DATABASE_VERSION++;
+    }
+
     /**
      * @param context
      */
@@ -166,7 +180,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 Class<?> cl = methods[i].getType();
                 String TypeName = cl.getSimpleName();
                 if (TypeName.equals("int")) {
-                    Log.i("OrmHelper", "ALTER TABLE " + tableName + " ADD '" + methods[i].getName()+ "' int"); //把所有字段名改成小写
+                    Log.i("OrmHelper", "ALTER TABLE " + tableName + " ADD '" + methods[i].getName() + "' int"); //把所有字段名改成小写
                     database.execSQL("ALTER TABLE " + tableName + " ADD '" + methods[i].getName() + "' int");//把所有字段名改成小写
                 } else {
                     Log.i("OrmHelper", "ALTER TABLE " + tableName + " ADD '" + methods[i].getName() + "' VARCHAR");//把所有字段名改成小写
