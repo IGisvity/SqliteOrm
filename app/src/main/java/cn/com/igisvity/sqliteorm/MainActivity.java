@@ -12,8 +12,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        DBHelper.initDBHelper("test.db");
-        DBHelper.addTable(TestTable.class);
+        DBHelper.initDBHelper("test.db",TestTable.class);
+//        DBHelper.addTable(TestTable.class);
         DBHelper dbHelper= new DBHelper(this);
         SQLiteDatabase sqLiteDatabase = dbHelper.getReadableDatabase();
         sqLiteDatabase.close();
