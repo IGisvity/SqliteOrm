@@ -1,8 +1,9 @@
-# Android Sqlite æ•°æ®åº“ä¾¿æ·æ“ä½œ
 
-ä½¿ç”¨ï¼š
+# Android Sqlite Êı¾İ¿â±ã½İ²Ù×÷
 
-1.  éœ€è¦åˆ›å»ºçš„è¡¨å¯¹åº”çš„Class
+Ê¹ÓÃ£º
+
+1.  ĞèÒª´´½¨µÄ±í¶ÔÓ¦µÄClass
 
 ```
 public class TestTable {
@@ -36,25 +37,25 @@ public class TestTable {
 }
 ```
 
-2. åˆå§‹åŒ–æ•°æ®åº“
+2. ³õÊ¼»¯Êı¾İ¿â
 
 ```
         DBHelper.initDBHelper("test.db",TestTable.class);
 ```
 
-3. åˆ›å»ºè¡¨
+3. ´´½¨±í
 
-- å¯ä»¥åœ¨åˆå§‹åŒ–æ•°æ®åº“æ—¶åˆ›å»ºã€‚
-- å…¶å®ƒæ—¶é—´åˆ›å»º(å…¶ä»–æ—¶é—´åˆ›å»ºè¡¨æ—¶ï¼Œæ•°æ®åº“ç‰ˆæœ¬å·è‡ªåŠ¨+1)ã€‚
+- ¿ÉÒÔÔÚ³õÊ¼»¯Êı¾İ¿âÊ±´´½¨¡£
+- ÆäËüÊ±¼ä´´½¨(ÆäËûÊ±¼ä´´½¨±íÊ±£¬Êı¾İ¿â°æ±¾ºÅ×Ô¶¯+1)¡£
 ```
     DBHelper.addTable(TestTable.class);
 ```
 
-4. æ›´æ–°è¡¨
+4. ¸üĞÂ±í
 
-    æ–‡æ¡£å¾…å®Œå–„....
+    ÎÄµµ´ıÍêÉÆ....
 
-5. æ’å…¥æ•°æ®
+5. ²åÈëÊı¾İ
 
 ```
                 JSONArray flows = jsonObject.getJSONArray("flows");
@@ -63,13 +64,28 @@ public class TestTable {
 
 ```
 
-6. è·å–æ•°æ®
+6. »ñÈ¡Êı¾İ
 
 ```
 DataBaseUtil.GetData(context, FlowLiuChengTable.class);
 
 yaopinkuJson = DataBaseUtil.GetData(ChuFangActivity.this, "select CANGKU,CANGKUID from Medicine group by CANGKU,CANGKUID");
 
-Object object = DataBaseUtil.GetOneData(ChuFangActivity.this, Medicine.class, " WHERE fmatid LIKE '" + MedicineId + "' and CANGKUID = '" + yaoPinKuTextView.getTag().toString() + "'"); //è·å–æ‰€æœ‰å†œæˆ·
+Object object = DataBaseUtil.GetOneData(ChuFangActivity.this, Medicine.class, " WHERE fmatid LIKE '" + MedicineId + "' and CANGKUID = '" + yaoPinKuTextView.getTag().toString() + "'"); //»ñÈ¡ËùÓĞÅ©»§
 
+```
+
+ÒıÓÃ£º
+
+```
+allprojects {
+    repositories {
+        maven { url "https://jitpack.io" }
+    }
+}
+
+```
+
+```
+    compile 'com.github.IGisvity:SqliteOrm:v1.0.4'
 ```
