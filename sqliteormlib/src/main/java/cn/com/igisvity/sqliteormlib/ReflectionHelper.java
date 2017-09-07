@@ -9,7 +9,7 @@ import java.lang.reflect.Method;
 /**
  * @author zhouzhou
  * @Title: ReflectionHelper
- * @Description:
+ * @Description:增加float  double 支持
  * @Company: www.cari.com.cn
  * @date 2015-9-24 下午4:01:53
  */
