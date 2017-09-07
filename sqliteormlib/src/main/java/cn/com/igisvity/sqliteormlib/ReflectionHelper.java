@@ -23,6 +23,8 @@ public class ReflectionHelper {
                     method.invoke(o, Integer.parseInt(paras));
                 } else if (parasType.equals(double.class)) {
                     method.invoke(o, Double.parseDouble(paras));
+                } else if (parasType.equals(float.class)) {
+                    method.invoke(o, Float.parseFloat(paras));
                 } else
                     method.invoke(o, paras);// 调用o对象的方法
             } catch (IllegalAccessException ex) {
