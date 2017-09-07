@@ -18,26 +18,20 @@ public class ReflectionHelper {
     public static void doMethod(String MethodName, Object o, String paras, Class parasType) {
         try {
             Method method = o.getClass().getDeclaredMethod(MethodName, parasType);
-            try {
-                if (parasType.equals(int.class)) {
-                    method.invoke(o, Integer.parseInt(paras));
-                } else if (parasType.equals(double.class)) {
-                    method.invoke(o, Double.parseDouble(paras));
-                } else if (parasType.equals(float.class)) {
-                    method.invoke(o, Float.parseFloat(paras));
-                } else
-                    method.invoke(o, paras);// 调用o对象的方法
-            } catch (IllegalAccessException ex) {
-                ex.fillInStackTrace();
-            } catch (IllegalArgumentException ex) {
-                ex.fillInStackTrace();
-            } catch (InvocationTargetException ex) {
-                ex.fillInStackTrace();
-            }
+            if (parasType.equals(int.class)) {
+                method.invoke(o, Integer.parseInt(paras));
+            } else if (parasType.equals(double.class)) {
+                method.invoke(o, Double.parseDouble(paras));
+            } else if (parasType.equals(float.class)) {
+                method.invoke(o, Float.parseFloat(paras));
+            } else
+                method.invoke(o, paras);// 调用o对象的方法
         } catch (NoSuchMethodException ex) {
             ex.fillInStackTrace();
-        } catch (SecurityException ex) {
-            ex.fillInStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
         }
 
     }
